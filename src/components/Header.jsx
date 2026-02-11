@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { ChevronDown } from 'lucide-react';
 import logoImage from '../assets/images/zv-removebg.avif';
 
@@ -6,33 +7,37 @@ const Header = () => {
     return (
         <header className="fixed top-0 left-0 w-full z-50 px-6 py-4 flex items-center justify-between bg-transparent hover:bg-black/40 hover:backdrop-blur-xl border-b border-transparent hover:border-white/10 transition-all duration-500 group/header">
             {/* Logo Section */}
-            <div className="flex items-center gap-2">
+            <Link to="/" className="flex items-center gap-2">
                 <img
                     src={logoImage}
                     alt="ZV Logo"
                     className="h-16 w-auto"
                 />
-            </div>
+            </Link>
 
             {/* Navigation Links */}
             <nav className="flex items-center gap-8">
-                <div className="group relative flex items-center gap-1 cursor-pointer">
-                    <span className="text-gray-300 hover:text-white transition-colors text-sm font-medium">
-                        Affiliating Programs
-                    </span>
-                    <ChevronDown size={14} className="text-gray-500 group-hover:text-white transition-colors mt-0.5" />
-                </div>
-                <div className="group relative flex items-center gap-1 cursor-pointer">
+                <Link to="/challenges" className="group relative flex items-center gap-1 cursor-pointer">
                     <span className="text-gray-300 hover:text-white transition-colors text-sm font-medium">
                         Challenges
                     </span>
                     <ChevronDown size={14} className="text-gray-500 group-hover:text-white transition-colors mt-0.5" />
-                </div>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors text-sm font-medium">
+                </Link>
+                <Link to="/affiliate" className="group relative flex items-center gap-1 cursor-pointer">
+                    <span className="text-gray-300 hover:text-white transition-colors text-sm font-medium">
+                        Affiliate
+                    </span>
+                    <ChevronDown size={14} className="text-gray-500 group-hover:text-white transition-colors mt-0.5" />
+                </Link>
+                <Link to="/about" className="text-gray-300 hover:text-white transition-colors text-sm font-medium">
                     About Us
+                </Link>
+                <a href="#" className="text-gray-300 hover:text-white transition-colors text-sm font-medium">
+                    FAQ
                 </a>
-
-
+                <a href="#" className="text-gray-300 hover:text-white transition-colors text-sm font-medium">
+                    Contact
+                </a>
             </nav>
 
             {/* Right Actions Section */}
