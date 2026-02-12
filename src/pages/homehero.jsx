@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import heroImage from '../assets/images/3d1.avif';
 import ctabgImage from '../assets/images/ctabg.avif';
 import { Users } from 'lucide-react';
+import platform1 from '../assets/platforms/platform1.avif';
+import platform2 from '../assets/platforms/platform2.avif';
+import platform3 from '../assets/platforms/platform3.avif';
 
 const AdvancedLoader = () => {
     // Exact gradient colors from #712CF9 -> #D63384 -> #FF1B6B
@@ -138,7 +141,8 @@ const HomeHero = () => {
             </section >
 
             {/* Section 2: Features/Stats */}
-            < section className="min-h-screen w-full flex flex-col items-center justify-center px-6 py-24 mt-20" >
+            {/* Section 2: Features/Stats */}
+            <section className="min-h-screen w-full flex flex-col items-center justify-center px-6 py-24 mt-20">
                 <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-3 gap-12">
                     <div className="flex flex-col items-center text-center p-8 rounded-3xl border border-white/5 bg-white/5 hover:border-white/10 transition-all">
                         <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#FF1B6B] to-[#D63384] flex items-center justify-center mb-6">
@@ -184,7 +188,8 @@ const HomeHero = () => {
             </section >
 
             {/* Section 3: Pricing Table */}
-            < section className="min-h-screen w-full flex flex-col items-center justify-center px-6 py-24 bg-black/40 backdrop-blur-sm" >
+            {/* Section 3: Pricing Table */}
+            <section className="min-h-screen w-full flex flex-col items-center justify-center px-6 py-24 bg-black/40 backdrop-blur-sm">
                 <div className="text-center mb-16 space-y-4">
                     <h2 className="text-4xl md:text-6xl font-black tracking-tight">
                         Buckle Up, Your Journey Starts Here!
@@ -331,16 +336,90 @@ const HomeHero = () => {
                         </div>
                     </div>
                 </div>
-            </section >
+            </section>
 
-            {/* Section 4: Community Section */}
-            < section
+            {/* Section 4: Integrations Section */}
+            <section className="w-full py-32 flex flex-col items-center justify-center relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-b from-black via-[#0A0B1A] to-black -z-10"></div>
+
+                {/* 2 Rings Visual - Absolute Centered Background */}
+                <div className="absolute inset-0 flex items-center justify-center overflow-hidden pointer-events-none">
+                    <div className="relative w-[800px] h-[800px] flex items-center justify-center">
+                        <div className="absolute w-full h-full rounded-full animate-[spin_60s_linear_infinite]">
+                            {[...Array(18)].map((_, i) => {
+                                // Even distribution around the full circle
+                                const angle = (i * 360) / 18;
+
+                                const icons = [platform1, platform2, platform3];
+                                const icon = icons[i % 3];
+
+                                return (
+                                    <div
+                                        key={i}
+                                        className="absolute top-1/2 left-1/2 w-16 h-16 -ml-8 -mt-8 flex items-center justify-center p-3 bg-black border border-white/10 rounded-2xl shadow-[0_0_20px_rgba(0,0,0,0.5)] transition-transform"
+                                        style={{
+                                            transform: `rotate(${angle}deg) translateX(400px) rotate(-${angle}deg)`,
+                                        }}
+                                    >
+                                        <img
+                                            src={icon}
+                                            alt="Integration"
+                                            className="w-full h-full object-contain"
+                                        />
+                                    </div>
+                                );
+                            })}
+                        </div>
+
+                        {/* Inner Ring for Depth */}
+                        <div className="absolute w-[600px] h-[600px] rounded-full animate-[spin_80s_linear_infinite_reverse]">
+                            {[...Array(12)].map((_, i) => {
+                                // Inner circle distribution
+                                const angle = (i * 360) / 12;
+
+                                const icons = [platform1, platform2, platform3];
+                                const icon = icons[(i + 1) % 3];
+
+                                return (
+                                    <div
+                                        key={`inner-${i}`}
+                                        className="absolute top-1/2 left-1/2 w-12 h-12 -ml-6 -mt-6 flex items-center justify-center p-2.5 bg-black border border-white/5 rounded-xl shadow-lg opacity-70"
+                                        style={{
+                                            transform: `rotate(${angle}deg) translateX(300px) rotate(-${angle}deg)`,
+                                        }}
+                                    >
+                                        <img
+                                            src={icon}
+                                            alt="Integration"
+                                            className="w-full h-full object-contain"
+                                        />
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
+                </div>
+
+                <div className="text-center relative z-10 px-6 max-w-4xl mx-auto">
+                    <div className="inline-block px-4 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm mb-8">
+                        <span className="text-blue-400 text-xs font-bold uppercase tracking-widest">Integrations</span>
+                    </div>
+                    <h2 className="text-5xl md:text-7xl font-black text-white tracking-tight mb-8">
+                        Connects to <br className="hidden md:block" /> Verification Services
+                    </h2>
+                    <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+                        Direct integration with Jumio, Onfido, and Socure for identity. Screening via World-Check, Dow Jones, and LexisNexis. Core system connections to Salesforce, banking platforms, and custom CRM systems.
+                    </p>
+                </div>
+            </section>
+
+            {/* Section 5: Community Section */}
+            <section
                 className="w-full relative py-32 overflow-hidden"
                 style={{
                     backgroundImage: `url(${ctabgImage})`,
                     backgroundPosition: 'center',
                     backgroundSize: 'cover',
-                    backgroundRepeat: 'no-repeat'
                 }}
             >
                 <div className="max-w-7xl mx-auto px-6 relative z-10 flex flex-col items-center">
