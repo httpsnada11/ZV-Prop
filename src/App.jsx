@@ -5,7 +5,7 @@ import HomeHero from './pages/homehero';
 import Affiliate from './pages/Affiliate';
 import Challenges from './pages/Challenges';
 import AboutUs from './pages/AboutUs';
-import Footer from './components/Footer';
+import Footer from './components/footer';
 
 function App() {
   return (
