@@ -275,7 +275,7 @@ const HomeHero = () => {
             </section>
 
             {/* Section 4: Community Section */}
-            <section 
+            <section
                 className="w-full relative py-32 overflow-hidden"
                 style={{
                     backgroundImage: `url(${ctabgImage})`,
@@ -315,10 +315,9 @@ const HomeHero = () => {
                             </div>
                             <div>
                                 <h4 className="text-white font-bold text-sm">Blueberry Bot <span className="text-gray-500 text-[10px] ml-1">Today at 10:24 AM</span></h4>
-                                <div className="flex flex-col gap-1">
-                                    <div className="h-1 w-20 bg-gray-600 rounded"></div>
-                                    <div className="h-1 w-32 bg-gray-600 rounded"></div>
-                                </div>
+                                <p className="text-gray-400 text-[11px] leading-tight mt-1">
+                                    Get 25% off all challenges this week with code: <span className="text-white font-mono">JUNE25</span>
+                                </p>
                             </div>
                         </div>
 
@@ -329,10 +328,9 @@ const HomeHero = () => {
                             </div>
                             <div>
                                 <h4 className="text-white font-bold text-sm">TradingPro <span className="text-gray-500 text-[10px] ml-1">Today at 10:24 AM</span></h4>
-                                <div className="flex flex-col gap-1">
-                                    <div className="h-1 w-24 bg-gray-600 rounded"></div>
-                                    <div className="h-1 w-28 bg-gray-600 rounded"></div>
-                                </div>
+                                <p className="text-gray-400 text-[11px] leading-tight mt-1">
+                                    Just passed my evaluation! Proceed into $50,000 real trading account! 🚀
+                                </p>
                             </div>
                         </div>
 
@@ -343,10 +341,9 @@ const HomeHero = () => {
                             </div>
                             <div>
                                 <h4 className="text-white font-bold text-sm">MarketMaster <span className="text-gray-500 text-[10px] ml-1">Today at 10:24 AM</span></h4>
-                                <div className="flex flex-col gap-1">
-                                    <div className="h-1 w-32 bg-gray-600 rounded"></div>
-                                    <div className="h-1 w-20 bg-gray-600 rounded"></div>
-                                </div>
+                                <p className="text-gray-400 text-[11px] leading-tight mt-1">
+                                    Anyone attending the webinar tonight? I want to know more about the feature!
+                                </p>
                             </div>
                         </div>
                     </div>

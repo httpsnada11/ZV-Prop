@@ -1,7 +1,11 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import HomeHero from './pages/homehero';
+import Affiliate from './pages/Affiliate';
+import Challenges from './pages/Challenges';
+import AboutUs from './pages/AboutUs';
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -10,8 +14,15 @@ function App() {
         <Header />
 
         <main className="pt-20 relative z-10">
-          <HomeHero />
+          <Routes>
+            <Route path="/" element={<HomeHero />} />
+            <Route path="/affiliate" element={<Affiliate />} />
+            <Route path="/challenges" element={<Challenges />} />
+            <Route path="/about" element={<AboutUs />} />
+          </Routes>
         </main>
+
+        <Footer />
       </div>
     </Router>
   );
