@@ -10,7 +10,7 @@ import Footer from './components/footer';
 function App() {
   return (
     <Router>
-      <div className="min-h-screen bg-black text-white selection:bg-blue-500/30">
+      <div className="min-h-screen bg-black text-white selection:bg-blue-500/30 overflow-x-hidden">
         <Header />
 
         <main className="pt-20 relative z-10">

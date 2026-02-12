@@ -1,6 +1,38 @@
 import React, { useState } from 'react';
-import heroImage from '../assets/images/ctabgr2.png';
+import heroImage from '../assets/images/3d1.avif';
 import ctabgImage from '../assets/images/ctabg.avif';
+import { Users } from 'lucide-react';
+
+const AdvancedLoader = () => {
+    // Exact gradient colors from #712CF9 -> #D63384 -> #FF1B6B
+    const colors = [
+        '#712CF9', '#822DE6', '#932DD3', '#A42EC0', '#B52EAD', '#C62F9A',
+        '#D63384', '#DD2F80', '#E52B7C', '#EC2778', '#F42374', '#FF1B6B'
+    ];
+
+    return (
+        <div className="relative w-5 h-5">
+            {[...Array(12)].map((_, i) => (
+                <div
+                    key={i}
+                    className="absolute top-0 left-1/2 w-[2px] h-[5px] rounded-full -translate-x-1/2 origin-[50%_10px]"
+                    style={{
+                        backgroundColor: colors[i], // Smooth gradient
+                        transform: `rotate(${i * 30}deg) translateY(0px)`,
+                        animation: `spinner-fade 1s linear infinite`,
+                        animationDelay: `-${(12 - i) * 0.0833}s`
+                    }}
+                />
+            ))}
+            <style>{`
+                @keyframes spinner-fade {
+                    0% { opacity: 1; }
+                    100% { opacity: 0.15; }
+                }
+            `}</style>
+        </div>
+    );
+};
 
 const HomeHero = () => {
     const [activeStep, setActiveStep] = useState('2 step');
@@ -36,50 +68,77 @@ const HomeHero = () => {
     return (
         <div className="w-full flex flex-col items-center">
             {/* Section 1: Hero */}
-            <section
-                className="min-h-[80vh] w-full flex flex-col items-center justify-center space-y-12 px-6 py-20 animate-in fade-in slide-in-from-bottom-8 duration-1000"
-                style={{
-                    backgroundImage: `url(${heroImage})`,
-                    backgroundPosition: 'center',
-                    backgroundSize: 'cover',
-                    backgroundRepeat: 'no-repeat'
-                }}
-            >
-                <h1 className="text-2xl md:text-4xl lg:text-6xl font-semibold tracking-tight leading-[1.15] max-w-4xl text-center">
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#712CF9] via-[#D63384] to-[#FF1B6B]">
-                        STOP TRADING SMALL.
-                    </span>
-                    <br />
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#712CF9]/90 via-[#D63384]/90 to-[#FF1B6B]/90">
-                        SCALE WITH OUR CAPITAL.
-                    </span>
-                </h1>
+            {/* Section 1: Hero */}
+            <section className="min-h-screen w-full flex items-center px-6 py-20 relative bg-black">
+                {/* Background Blobs/Effects */}
+                <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] bg-[#712CF9]/20 rounded-full blur-[120px] pointer-events-none"></div>
+                <div className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] bg-[#FF1B6B]/20 rounded-full blur-[120px] pointer-events-none"></div>
 
-                <p className="text-gray-400 text-base md:text-xl max-w-2xl mx-auto text-center leading-relaxed font-normal tracking-tight">
-                    Transform your trading journey with our exclusive prop firm program,
-                    featuring rare opportunities and unique strategies for elite traders.
-                </p>
+                <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10 transition-all duration-1000 ease-out animate-in fade-in slide-in-from-bottom-8">
 
-                <div className="flex items-center justify-center pt-6">
-                    <div className="p-[1px] rounded-full bg-gradient-to-r from-[#FF1B6B] via-[#D63384] to-[#712CF9]">
-                        <button className="px-8 py-3 rounded-full bg-black/80 backdrop-blur-sm text-white text-sm font-bold tracking-wider uppercase whitespace-nowrap hover:bg-black transition-colors">
-                            Start Challenges
-                        </button>
+                    {/* Left Content */}
+                    <div className="flex flex-col items-start space-y-8 relative z-50">
+                        <h1 className="text-4xl md:text-6xl lg:text-8xl font-black tracking-tighter leading-[0.9] text-white uppercase text-left">
+                            <span className="block">STOP</span>
+                            <span className="block">TRADING</span>
+                            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#712CF9] via-[#D63384] to-[#FF1B6B]">SMALL.</span>
+                        </h1>
+
+                        <h2 className="text-lg md:text-2xl font-bold text-gray-400 uppercase tracking-widest text-left">
+                            SCALE WITH OUR CAPITAL
+                        </h2>
+
+                        {/* Pill/badge moved here */}
+                        <div className="flex bg-white/5 backdrop-blur-md border border-white/20 px-4 py-2 rounded-full items-center gap-3 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-500 box-content w-auto max-w-none mt-4">
+                            <div className="w-8 h-8 rounded-full flex items-center justify-center shrink-0">
+                                <AdvancedLoader />
+                            </div>
+                            <span className="text-white font-medium tracking-wide text-xs md:text-sm leading-tight text-left whitespace-nowrap">Transform your trading journey with our exclusive prop firm program, featuring rare opportunities and unique strategies for elite traders.</span>
+                        </div>
+
+                        <div className="flex items-center gap-6 mt-4">
+                            <div className="p-[1px] rounded-full bg-gradient-to-r from-[#FF1B6B] via-[#D63384] to-[#712CF9]">
+                                <button className="px-10 py-4 rounded-full bg-black text-white text-sm md:text-base font-bold tracking-widest uppercase hover:bg-white/10 transition-all">
+                                    Start Challenges
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    {/* Right Image (3D Object) */}
+                    <div className="relative h-full flex items-center justify-center lg:justify-end z-0">
+                        <img
+                            src={heroImage}
+                            alt="3D Abstract Shape"
+                            className="w-[180%] max-w-none object-contain drop-shadow-2xl animate-in fade-in zoom-in duration-1000 delay-300 translate-x-24 -translate-y-32 scale-110"
+                        />
                     </div>
                 </div>
 
-                <div className="pt-12 flex flex-col items-center gap-2 text-gray-500 cursor-pointer animate-bounce">
-                    <span className="text-sm font-medium uppercase tracking-[0.2em]">Discover More</span>
-                    <div>
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+
+                {/* Discover More - Center Bottom */}
+                <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-gray-500 cursor-pointer hover:text-white transition-colors group z-20 animate-bounce-slight">
+                    <span className="text-sm font-medium uppercase tracking-[0.2em] text-gray-400 group-hover:text-white transition-colors">Discover More</span>
+                    <div className="group-hover:translate-y-1 transition-transform">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                             <path d="m6 9 6 6 6-6" />
                         </svg>
                     </div>
                 </div>
-            </section>
+                <style>{`
+                    @keyframes bounce-slight {
+                        0%, 100% { transform: translateY(0); }
+                        50% { transform: translateY(-10px); }
+                    }
+                    .animate-bounce-slight {
+                        animation: bounce-slight 2s infinite ease-in-out;
+                    }
+                `}</style>
+            </section >
 
             {/* Section 2: Features/Stats */}
-            <section className="min-h-screen w-full flex flex-col items-center justify-center border-t border-white/10 px-6 py-24 mt-20">
+            < section className="min-h-screen w-full flex flex-col items-center justify-center px-6 py-24 mt-20" >
                 <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-3 gap-12">
                     <div className="flex flex-col items-center text-center p-8 rounded-3xl border border-white/5 bg-white/5 hover:border-white/10 transition-all">
                         <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#FF1B6B] to-[#D63384] flex items-center justify-center mb-6">
@@ -122,10 +181,10 @@ const HomeHero = () => {
                         </button>
                     </div>
                 </div>
-            </section>
+            </section >
 
             {/* Section 3: Pricing Table */}
-            <section className="min-h-screen w-full flex flex-col items-center justify-center px-6 py-24 bg-black/40 backdrop-blur-sm border-t border-white/10">
+            < section className="min-h-screen w-full flex flex-col items-center justify-center px-6 py-24 bg-black/40 backdrop-blur-sm" >
                 <div className="text-center mb-16 space-y-4">
                     <h2 className="text-4xl md:text-6xl font-black tracking-tight">
                         Buckle Up, Your Journey Starts Here!
@@ -272,10 +331,10 @@ const HomeHero = () => {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section >
 
             {/* Section 4: Community Section */}
-            <section
+            < section
                 className="w-full relative py-32 overflow-hidden"
                 style={{
                     backgroundImage: `url(${ctabgImage})`,
@@ -289,9 +348,7 @@ const HomeHero = () => {
                     <div className="relative mb-12 group">
                         <div className="absolute -inset-4 bg-[#0384CC]/20 rounded-[2rem] blur-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
                         <div className="w-20 h-20 bg-gradient-to-br from-[#0384CC] to-[#D63384] rounded-[1.5rem] flex items-center justify-center shadow-[0_0_30px_rgba(3,132,204,0.3)] relative transform transition-transform group-hover:scale-105">
-                            <svg width="40" height="40" viewBox="0 0 24 24" fill="white">
-                                <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.419c0 1.334-.947 2.419-2.157 2.419zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.419c0 1.334-.946 2.419-2.157 2.419z" />
-                            </svg>
+                            <Users size={40} className="text-white" />
                         </div>
                     </div>
 
@@ -299,7 +356,7 @@ const HomeHero = () => {
                         Join our <br className="md:hidden" /> community
                     </h2>
                     <p className="text-gray-400 text-lg md:text-xl max-w-xl text-center mb-12">
-                        Sign into our Discord Server for access to ongoing promotions, careers, and account Giveaways!
+                        Join the ZV-Prop community to connect with elite traders, access exclusive insights, and stay updated on our latest prop trading challenges and offers.
                     </p>
 
                     <button className="px-10 py-4 bg-gradient-to-r from-[#0384CC] to-[#D63384] hover:opacity-90 text-white font-bold rounded-full transition-all shadow-[0_0_20px_rgba(3,132,204,0.4)] mb-20 transform hover:-translate-y-1">
@@ -316,7 +373,7 @@ const HomeHero = () => {
                             <div>
                                 <h4 className="text-white font-bold text-sm">Blueberry Bot <span className="text-gray-500 text-[10px] ml-1">Today at 10:24 AM</span></h4>
                                 <p className="text-gray-400 text-[11px] leading-tight mt-1">
-                                    Get 25% off all challenges this week with code: <span className="text-white font-mono">JUNE25</span>
+                                    Get 25% off all challenges this week with code: <span className="text-white font-mono">FEBRUARY26</span>
                                 </p>
                             </div>
                         </div>
@@ -342,14 +399,14 @@ const HomeHero = () => {
                             <div>
                                 <h4 className="text-white font-bold text-sm">MarketMaster <span className="text-gray-500 text-[10px] ml-1">Today at 10:24 AM</span></h4>
                                 <p className="text-gray-400 text-[11px] leading-tight mt-1">
-                                    Anyone attending the webinar tonight? I want to know more about the feature!
+                                    Anyone attending the webinar tonight? I want to know more about the benefits!
                                 </p>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
-        </div>
+            </section >
+        </div >
     );
 };
 

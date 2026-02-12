@@ -32,12 +32,7 @@ const Header = () => {
                 <Link to="/about" className="text-gray-300 hover:text-white transition-colors text-sm font-medium">
                     About Us
                 </Link>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors text-sm font-medium">
-                    FAQ
-                </a>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors text-sm font-medium">
-                    Contact
-                </a>
+
             </nav>
 
             {/* Right Actions Section */}
