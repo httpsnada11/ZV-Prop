@@ -1,7 +1,9 @@
 import React from 'react';
 import heroImage from '../assets/images/3d1.avif';
 import ctabgImage from '../assets/images/ctabg.avif';
-import { Users } from 'lucide-react';
+import gridBg from '../assets/images/Grid 2.png';
+import bgImage3 from '../assets/images/3d3.avif';
+import { Users, Check } from 'lucide-react';
 import platform1 from '../assets/platforms/platform1.avif';
 import platform2 from '../assets/platforms/platform2.avif';
 import platform3 from '../assets/platforms/platform3.avif';
@@ -14,25 +16,17 @@ const AdvancedLoader = () => {
     ];
 
     return (
-        <div className="relative w-5 h-5">
+        <div className="relative w-5 h-5 animate-spin">
             {[...Array(12)].map((_, i) => (
                 <div
                     key={i}
-                    className="absolute top-0 left-1/2 w-[2px] h-[5px] rounded-full -translate-x-1/2 origin-[50%_10px]"
+                    className="absolute top-1/2 left-1/2 w-[2px] h-[5px] rounded-full"
                     style={{
-                        backgroundColor: colors[i], // Smooth gradient
-                        transform: `rotate(${i * 30}deg) translateY(0px)`,
-                        animation: `spinner-fade 1s linear infinite`,
-                        animationDelay: `-${(12 - i) * 0.0833}s`
+                        backgroundColor: colors[i],
+                        transform: `translate(-50%, -50%) rotate(${i * 30}deg) translateY(-7px)`,
                     }}
                 />
             ))}
-            <style>{`
-                @keyframes spinner-fade {
-                    0% { opacity: 1; }
-                    100% { opacity: 0.15; }
-                }
-            `}</style>
         </div>
     );
 };
@@ -101,14 +95,14 @@ const HomeHero = () => {
                     </div>
                 </div>
                 <style>{`
-                    @keyframes bounce-slight {
-                        0%, 100% { transform: translateY(0); }
-                        50% { transform: translateY(-10px); }
-                    }
-                    .animate-bounce-slight {
-                        animation: bounce-slight 2s infinite ease-in-out;
-                    }
-                `}</style>
+@keyframes bounce - slight {
+    0 %, 100 % { transform: translateY(0); }
+    50 % { transform: translateY(-10px); }
+}
+                    .animate - bounce - slight {
+    animation: bounce - slight 2s infinite ease -in -out;
+}
+`}</style>
             </section >
 
             {/* Section 2: Why We're Different */}
@@ -142,15 +136,240 @@ const HomeHero = () => {
                 </div>
             </section>
 
+            {/* Section 3: Trade at Your Own Pace */}
+            <section className="w-full py-24 flex items-center justify-center relative bg-black">
+                <div className="max-w-7xl mx-auto px-6">
+                    <div className="relative w-full max-w-sm mx-auto aspect-[3/4] rounded-[2.5rem] overflow-hidden group">
+                        {/* Card Background & Border */}
+                        <div className="absolute inset-0 bg-gradient-to-b from-[#0f1225] to-[#000000] z-0"></div>
+                        <div className="absolute inset-0 rounded-[2.5rem] border border-white/10 z-20 pointer-events-none"></div>
+
+                        {/* Blue Glow Effects */}
+                        <div className="absolute top-[-10%] right-[-20%] w-[300px] h-[300px] bg-blue-600/20 rounded-full blur-[80px] z-10"></div>
+                        <div className="absolute bottom-[-10%] left-[-10%] w-[300px] h-[300px] bg-blue-600/10 rounded-full blur-[80px] z-10"></div>
+
+                        {/* Bottom Arc Glow */}
+                        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[120%] h-[100px] bg-blue-500/20 blur-[50px] rounded-[100%] z-10"></div>
+                        <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-[80%] h-[4px] bg-blue-400 blur-[2px] rounded-full z-20"></div>
+
+                        {/* Content */}
+                        <div className="relative z-30 h-full flex flex-col p-8 md:p-10 text-center items-center">
+                            {/* Top Right Orb/Logo */}
+                            <div className="absolute top-6 right-6 w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-blue-900 shadow-[0_0_20px_rgba(37,99,235,0.5)] flex items-center justify-center border border-white/20">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 2L15 8L21 9L17 14L18 20L12 17L6 20L7 14L3 9L9 8L12 2Z" fill="white" fillOpacity="0.8" />
+                                </svg>
+                            </div>
+
+                            {/* Main Title */}
+                            <div className="mt-12 flex flex-col items-center">
+                                <h3 className="text-5xl md:text-6xl font-bold tracking-tighter text-white leading-[0.9]">
+                                    Trade
+                                </h3>
+                                <h3 className="text-5xl md:text-6xl font-bold tracking-tighter leading-[0.9]">
+                                    <span className="text-white">at </span>
+                                    <span className="text-blue-400">Your</span>
+                                </h3>
+                                <h3 className="text-5xl md:text-6xl font-bold tracking-tighter text-white leading-[0.9]">
+                                    Own
+                                </h3>
+                                <h3 className="text-5xl md:text-6xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-blue-300 to-blue-600 leading-[0.9]">
+                                    Pace
+                                </h3>
+                            </div>
+
+                            {/* Subtitle */}
+                            <div className="mt-auto mb-8">
+                                <p className="text-lg text-gray-300 font-medium">No deadlines.</p>
+                                <p className="text-lg text-gray-300 font-medium">No pressure.</p>
+                            </div>
+
+                            {/* Footer Text */}
+                            <div className="text-[10px] font-bold tracking-[0.2em] text-gray-600 uppercase">
+                                FOCUS ON YOUR EDGE.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Section 3.5: Trading Assets / Industries Vertical Scroll Section */}
+            <section className="w-full relative bg-black pt-24 pb-48 overflow-hidden">
+                {/* Background 3D Image */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] z-0 pointer-events-none">
+                    <img
+                        src={bgImage3}
+                        alt="3D Background"
+                        className="w-full h-full object-contain animate-pulse-slow"
+                    />
+                </div>
+
+                <div className="max-w-[1400px] mx-auto px-6 relative z-10">
+                    <div className="flex flex-col lg:flex-row gap-12 lg:gap-24 items-start">
+                        {/* Left Side: Sticky Content */}
+                        <div className="lg:w-1/3 lg:sticky lg:top-32 self-start h-auto">
+                            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.1] mb-6">
+                                We Offer Industry-Leading <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600">Trading Assets</span>
+                            </h2>
+                            <p className="text-gray-400 text-lg leading-relaxed mb-8">
+                                ZV Prop provides access to refined trading environments for every strategy. From Forex to Crypto, trade on professional-grade infrastructure designed for scaling.
+                            </p>
+                            <div className="hidden lg:block">
+                                <div className="p-[1px] rounded-full bg-gradient-to-r from-[#FF1B6B] via-[#D63384] to-[#712CF9] inline-block hover:scale-105 transition-transform duration-300">
+                                    <button className="px-8 py-3 rounded-full bg-black/80 backdrop-blur-sm text-white font-bold uppercase tracking-wider hover:bg-black transition-colors">
+                                        View All Assets
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Right Side: Vertical Stacked Cards */}
+                        <div className="lg:w-2/3 w-full flex flex-col gap-24 pb-24">
+                            {/* Card 1: Forex */}
+                            <div className="w-full bg-white/5 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 md:p-12 flex flex-col relative overflow-hidden group hover:border-white/20 transition-colors duration-500">
+                                <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/20 rounded-full blur-[100px] -mr-32 -mt-32 transition-opacity duration-500 group-hover:opacity-100 opacity-60"></div>
+
+                                <h3 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300 mb-6 drop-shadow-sm">Forex</h3>
+                                <p className="text-gray-400 mb-10 leading-relaxed text-xl max-w-2xl">
+                                    Trade major, minor, and exotic currency pairs with raw STP spreads and ultra-low latency execution.
+                                </p>
+
+                                <div className="space-y-6 mt-auto">
+                                    <div className="flex items-center gap-4 group/item">
+                                        <div className="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center shrink-0 group-hover/item:bg-blue-500/30 transition-colors">
+                                            <Check className="w-4 h-4 text-blue-400" />
+                                        </div>
+                                        <span className="text-gray-200 text-lg group-hover/item:text-white transition-colors">EUR/USD from 0.0 pips</span>
+                                    </div>
+                                    <div className="flex items-center gap-4 group/item">
+                                        <div className="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center shrink-0 group-hover/item:bg-blue-500/30 transition-colors">
+                                            <Check className="w-4 h-4 text-blue-400" />
+                                        </div>
+                                        <span className="text-gray-200 text-lg group-hover/item:text-white transition-colors">No commission structure</span>
+                                    </div>
+                                    <div className="flex items-center gap-4 group/item">
+                                        <div className="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center shrink-0 group-hover/item:bg-blue-500/30 transition-colors">
+                                            <Check className="w-4 h-4 text-blue-400" />
+                                        </div>
+                                        <span className="text-gray-200 text-lg group-hover/item:text-white transition-colors">1:100 Leverage</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Card 2: Indices */}
+                            <div className="w-full bg-white/5 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 md:p-12 flex flex-col relative overflow-hidden group hover:border-white/20 transition-colors duration-500">
+                                <div className="absolute top-0 right-0 w-64 h-64 bg-purple-500/20 rounded-full blur-[100px] -mr-32 -mt-32 transition-opacity duration-500 group-hover:opacity-100 opacity-60"></div>
+
+                                <h3 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-300 mb-6 drop-shadow-sm">Indices</h3>
+                                <p className="text-gray-400 mb-10 leading-relaxed text-xl max-w-2xl">
+                                    Access global markets. Trade US30, NAS100, and DAX40 with zero commission and high liquidity.
+                                </p>
+
+                                <div className="space-y-6 mt-auto">
+                                    <div className="flex items-center gap-4 group/item">
+                                        <div className="w-8 h-8 rounded-full bg-purple-500/20 flex items-center justify-center shrink-0 group-hover/item:bg-purple-500/30 transition-colors">
+                                            <Check className="w-4 h-4 text-purple-400" />
+                                        </div>
+                                        <span className="text-gray-200 text-lg group-hover/item:text-white transition-colors">Real-time market data</span>
+                                    </div>
+                                    <div className="flex items-center gap-4 group/item">
+                                        <div className="w-8 h-8 rounded-full bg-purple-500/20 flex items-center justify-center shrink-0 group-hover/item:bg-purple-500/30 transition-colors">
+                                            <Check className="w-4 h-4 text-purple-400" />
+                                        </div>
+                                        <span className="text-gray-200 text-lg group-hover/item:text-white transition-colors">No slippage during volatility</span>
+                                    </div>
+                                    <div className="flex items-center gap-4 group/item">
+                                        <div className="w-8 h-8 rounded-full bg-purple-500/20 flex items-center justify-center shrink-0 group-hover/item:bg-purple-500/30 transition-colors">
+                                            <Check className="w-4 h-4 text-purple-400" />
+                                        </div>
+                                        <span className="text-gray-200 text-lg group-hover/item:text-white transition-colors">Fixed spreads available</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Card 3: Crypto */}
+                            <div className="w-full bg-white/5 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 md:p-12 flex flex-col relative overflow-hidden group hover:border-white/20 transition-colors duration-500">
+                                <div className="absolute top-0 right-0 w-64 h-64 bg-yellow-500/20 rounded-full blur-[100px] -mr-32 -mt-32 transition-opacity duration-500 group-hover:opacity-100 opacity-60"></div>
+
+                                <h3 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-300 mb-6 drop-shadow-sm">Crypto</h3>
+                                <p className="text-gray-400 mb-10 leading-relaxed text-xl max-w-2xl">
+                                    Trade the future. Bitcoin, Ethereum, and major altcoins available 24/7/365 with deep liquidity.
+                                </p>
+
+                                <div className="space-y-6 mt-auto">
+                                    <div className="flex items-center gap-4 group/item">
+                                        <div className="w-8 h-8 rounded-full bg-yellow-500/20 flex items-center justify-center shrink-0 group-hover/item:bg-yellow-500/30 transition-colors">
+                                            <Check className="w-4 h-4 text-yellow-400" />
+                                        </div>
+                                        <span className="text-gray-200 text-lg group-hover/item:text-white transition-colors">Weekend Trading Enabled</span>
+                                    </div>
+                                    <div className="flex items-center gap-4 group/item">
+                                        <div className="w-8 h-8 rounded-full bg-yellow-500/20 flex items-center justify-center shrink-0 group-hover/item:bg-yellow-500/30 transition-colors">
+                                            <Check className="w-4 h-4 text-yellow-400" />
+                                        </div>
+                                        <span className="text-gray-200 text-lg group-hover/item:text-white transition-colors">1:50 Leverage on Crypto</span>
+                                    </div>
+                                    <div className="flex items-center gap-4 group/item">
+                                        <div className="w-8 h-8 rounded-full bg-yellow-500/20 flex items-center justify-center shrink-0 group-hover/item:bg-yellow-500/30 transition-colors">
+                                            <Check className="w-4 h-4 text-yellow-400" />
+                                        </div>
+                                        <span className="text-gray-200 text-lg group-hover/item:text-white transition-colors">Instant execution</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Card 4: Commodities */}
+                            <div className="w-full bg-white/5 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 md:p-12 flex flex-col relative overflow-hidden group hover:border-white/20 transition-colors duration-500">
+                                <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/20 rounded-full blur-[100px] -mr-32 -mt-32 transition-opacity duration-500 group-hover:opacity-100 opacity-60"></div>
+
+                                <h3 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300 mb-6 drop-shadow-sm">Commodities</h3>
+                                <p className="text-gray-400 mb-10 leading-relaxed text-xl max-w-2xl">
+                                    Diversify with Gold (XAU), Silver (XAG), and Oil. Hedge your portfolio against market volatility.
+                                </p>
+
+                                <div className="space-y-6 mt-auto">
+                                    <div className="flex items-center gap-4 group/item">
+                                        <div className="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center shrink-0 group-hover/item:bg-emerald-500/30 transition-colors">
+                                            <Check className="w-4 h-4 text-emerald-400" />
+                                        </div>
+                                        <span className="text-gray-200 text-lg group-hover/item:text-white transition-colors">Tight spreads on Gold</span>
+                                    </div>
+                                    <div className="flex items-center gap-4 group/item">
+                                        <div className="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center shrink-0 group-hover/item:bg-emerald-500/30 transition-colors">
+                                            <Check className="w-4 h-4 text-emerald-400" />
+                                        </div>
+                                        <span className="text-gray-200 text-lg group-hover/item:text-white transition-colors">No swap fees on majors</span>
+                                    </div>
+                                    <div className="flex items-center gap-4 group/item">
+                                        <div className="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center shrink-0 group-hover/item:bg-emerald-500/30 transition-colors">
+                                            <Check className="w-4 h-4 text-emerald-400" />
+                                        </div>
+                                        <span className="text-gray-200 text-lg group-hover/item:text-white transition-colors">Institutional Grade pricing</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+
 
 
             {/* Section 4: Integrations Section */}
             <section className="w-full py-32 flex flex-col items-center justify-center relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-b from-black via-[#0A0B1A] to-black -z-10"></div>
 
-                {/* 2 Rings Visual - Absolute Centered Background */}
-                <div className="absolute inset-0 flex items-center justify-center overflow-hidden pointer-events-none">
-                    <div className="relative w-[800px] h-[800px] flex items-center justify-center">
+                {/* 2 Rings Visual - Absolute Centered Background with Mask */}
+                <div
+                    className="absolute inset-0 flex items-center justify-center overflow-hidden pointer-events-none"
+                    style={{
+                        maskImage: 'linear-gradient(to bottom, black 0%, transparent 35%, transparent 65%, black 100%)',
+                        WebkitMaskImage: 'linear-gradient(to bottom, black 0%, transparent 35%, transparent 65%, black 100%)'
+                    }}
+                >
+                    <div className="relative w-[1200px] h-[1200px] flex items-center justify-center">
+                        {/* Outer Ring */}
                         <div className="absolute w-full h-full rounded-full animate-[spin_60s_linear_infinite]">
                             {[...Array(18)].map((_, i) => {
                                 // Even distribution around the full circle
@@ -162,9 +381,9 @@ const HomeHero = () => {
                                 return (
                                     <div
                                         key={i}
-                                        className="absolute top-1/2 left-1/2 w-16 h-16 -ml-8 -mt-8 flex items-center justify-center p-3 bg-black border border-white/10 rounded-2xl shadow-[0_0_20px_rgba(0,0,0,0.5)] transition-transform"
+                                        className="absolute top-1/2 left-1/2 w-20 h-20 -ml-10 -mt-10 flex items-center justify-center p-4 bg-black border border-white/10 rounded-2xl shadow-[0_0_20px_rgba(0,0,0,0.5)] transition-transform"
                                         style={{
-                                            transform: `rotate(${angle}deg) translateX(400px) rotate(-${angle}deg)`,
+                                            transform: `rotate(${angle}deg) translateX(600px) rotate(-${angle}deg)`,
                                         }}
                                     >
                                         <img
@@ -178,7 +397,7 @@ const HomeHero = () => {
                         </div>
 
                         {/* Inner Ring for Depth */}
-                        <div className="absolute w-[600px] h-[600px] rounded-full animate-[spin_80s_linear_infinite_reverse]">
+                        <div className="absolute w-[900px] h-[900px] rounded-full animate-[spin_80s_linear_infinite_reverse]">
                             {[...Array(12)].map((_, i) => {
                                 // Inner circle distribution
                                 const angle = (i * 360) / 12;
@@ -189,9 +408,9 @@ const HomeHero = () => {
                                 return (
                                     <div
                                         key={`inner-${i}`}
-                                        className="absolute top-1/2 left-1/2 w-12 h-12 -ml-6 -mt-6 flex items-center justify-center p-2.5 bg-black border border-white/5 rounded-xl shadow-lg opacity-70"
+                                        className="absolute top-1/2 left-1/2 w-16 h-16 -ml-8 -mt-8 flex items-center justify-center p-3 bg-black border border-white/5 rounded-xl shadow-lg opacity-70"
                                         style={{
-                                            transform: `rotate(${angle}deg) translateX(300px) rotate(-${angle}deg)`,
+                                            transform: `rotate(${angle}deg) translateX(450px) rotate(-${angle}deg)`,
                                         }}
                                     >
                                         <img
@@ -214,10 +433,10 @@ const HomeHero = () => {
                         <span className="text-white font-medium tracking-wide text-xs md:text-sm leading-tight text-left whitespace-nowrap">INTEGRATIONS</span>
                     </div>
                     <h2 className="text-5xl md:text-7xl font-black text-white tracking-tight mb-8">
-                        Connects to <br className="hidden md:block" /> Verification Services
+                        Trade on Your Favorite <br className="hidden md:block" /> Platforms
                     </h2>
                     <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
-                        Direct integration with Jumio, Onfido, and Socure for identity. Screening via World-Check, Dow Jones, and LexisNexis. Core system connections to Salesforce, banking platforms, and custom CRM systems.
+                        Experience lightning-fast execution on the industry's leading platforms. Whether you prefer MetaTrader 4, MetaTrader 5, cTrader, or Match-Trader, ZV Prop provides the deep liquidity and raw spreads you need to succeed.
                     </p>
                 </div>
             </section>

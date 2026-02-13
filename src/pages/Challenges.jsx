@@ -123,6 +123,24 @@ const Challenges = () => {
                 </p>
             </div>
 
+            {/* Growth Calculator Section (Commented out) 
+            <div className="max-w-5xl mx-auto px-4 mb-20">
+                <div className="bg-gray-900/40 border border-gray-800 rounded-3xl p-6 md:p-10 backdrop-blur-sm relative overflow-hidden">
+                    <div className="text-center mb-10">
+                        <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent mb-4">
+                            Discover how much you can grow your account!
+                        </h2>
+                        <p className="text-gray-400 max-w-2xl mx-auto">
+                            Every trader's journey is unique. Use our growth calculator to see how much your account could
+                            grow and discover the potential of trading with ZV Prop.
+                        </p>
+                    </div>
+
+                    <GrowthCalculator />
+                </div>
+            </div>
+            */}
+
             <div className="max-w-6xl mx-auto px-4 md:px-8">
 
                 <div className="flex flex-col items-center gap-8 mb-12">
@@ -173,8 +191,8 @@ const Challenges = () => {
                                 key={s}
                                 onClick={() => setSize(s)}
                                 className={`px-4 py-2 rounded-lg text-sm font-semibold border transition-all duration-300 ${size === s
-                                        ? 'bg-blue-600/20 border-blue-500 text-blue-400 shadow-[0_0_10px_rgba(37,99,235,0.2)]'
-                                        : 'bg-gray-900/50 border-gray-800 text-gray-400 hover:border-gray-700 hover:text-gray-300'
+                                    ? 'bg-blue-600/20 border-blue-500 text-blue-400 shadow-[0_0_10px_rgba(37,99,235,0.2)]'
+                                    : 'bg-gray-900/50 border-gray-800 text-gray-400 hover:border-gray-700 hover:text-gray-300'
                                     }`}
                             >
                                 ${s.toUpperCase()}
@@ -306,5 +324,196 @@ const Row = ({ label, values, tooltip }) => (
         ))}
     </tr>
 );
+
+const GrowthCalculator = () => {
+    const [calcSize, setCalcSize] = useState(50000);
+    const [timeIndex, setTimeIndex] = useState(2); // Default to 1 Year (index 2)
+    const [profitIndex, setProfitIndex] = useState(2); // Default to 10% (index 2)
+
+    const timeOptions = [
+        { label: '0', months: 0 },
+        { label: '4 Months', months: 4 },
+        { label: '8 Months', months: 8 },
+        { label: '1 Year', months: 12 },
+        { label: '2 Years', months: 24 },
+    ];
+
+    const profitOptions = [1, 5, 10, 20];
+
+    // Calculation Logic
+    const calculateGrowth = () => {
+        const months = timeOptions[timeIndex].months;
+        const monthlyProfit = profitOptions[profitIndex] / 100;
+
+        let balance = calcSize;
+        let totalPayout = 0;
+        const profitSplit = 0.95; // 95% split
+
+        // Scaling points: 4, 8, 12, 16, 20, 24...
+        // Scaling %: 25% (1st), 40% (2nd), 50% (3rd+)
+
+        for (let m = 1; m <= months; m++) {
+            // Calculate Profit & Payout
+            const profit = balance * monthlyProfit;
+            totalPayout += profit * profitSplit;
+
+            // Apply Scaling AFTER profit calculation (at end of month 4, 8, etc.)
+            if (m % 4 === 0) {
+                let scalePercent = 0;
+                const scaleCount = m / 4;
+
+                if (scaleCount === 1) scalePercent = 0.25;
+                else if (scaleCount === 2) scalePercent = 0.40;
+                else scalePercent = 0.50;
+
+                balance += balance * scalePercent;
+            }
+        }
+
+        return { balance, totalPayout };
+    };
+
+    const { balance, totalPayout } = calculateGrowth();
+
+    return (
+        <div className="w-full">
+            {/* Account Size Selector */}
+            <div className="flex flex-col items-center mb-12">
+                <div className="text-gray-400 text-sm font-semibold uppercase tracking-wider mb-4">Account Size</div>
+                <div className="flex flex-wrap justify-center gap-2">
+                    {[5000, 10000, 25000, 50000, 100000, 200000].map(s => (
+                        <button
+                            key={s}
+                            onClick={() => setCalcSize(s)}
+                            className={`px-5 py-2 rounded-full text-sm font-bold transition-all ${calcSize === s
+                                ? 'bg-blue-600 text-white shadow-[0_0_15px_rgba(37,99,235,0.5)] scale-105'
+                                : 'bg-gray-800/50 text-gray-400 hover:bg-gray-700 hover:text-white'
+                                }`}
+                        >
+                            ${(s >= 1000 ? s / 1000 + 'k' : s)}
+                        </button>
+                    ))}
+                </div>
+                <div className="mt-6 text-gray-300 font-bold bg-gray-800/50 px-4 py-1.5 rounded-full border border-gray-700">
+                    Reward Split <span className="text-blue-400 ml-2">95 : 5</span>
+                </div>
+            </div>
+
+            {/* Sliders Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mb-12">
+                {/* Time Period Slider */}
+                <div className="bg-gray-800/30 p-6 md:p-8 rounded-2xl border border-white/5 relative">
+                    <div className="flex justify-between mb-8 items-center">
+                        <span className="text-white font-bold text-lg">Time Period</span>
+                    </div>
+
+                    <div className="relative px-2 mb-8">
+                        <input
+                            type="range"
+                            min="0"
+                            max="4"
+                            step="1"
+                            value={timeIndex}
+                            onChange={(e) => setTimeIndex(parseInt(e.target.value))}
+                            className="w-full h-3 bg-gray-700 rounded-full appearance-none cursor-pointer accent-blue-500 hover:accent-blue-400 transition-all"
+                        />
+                        {/* Markers */}
+                        <div className="flex justify-between w-full px-1 absolute top-1/2 -translate-y-1/2 pointer-events-none">
+                            {[0, 1, 2, 3, 4].map(i => (
+                                <div key={i} className={`w-3 h-3 rounded-full ${i <= timeIndex ? 'bg-blue-500' : 'bg-gray-600'}`}></div>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className="flex justify-between text-xs md:text-sm text-gray-500 font-medium px-1">
+                        {timeOptions.map((opt, i) => (
+                            <div key={i} className={`flex flex-col items-center gap-1 ${i === timeIndex ? 'text-blue-400 font-bold' : ''}`}>
+                                <span>{opt.label}</span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Profit Target Slider */}
+                <div className="bg-gray-800/30 p-6 md:p-8 rounded-2xl border border-white/5 relative">
+                    <div className="flex justify-between mb-8 items-center">
+                        <span className="text-white font-bold text-lg">Profit Target</span>
+                        <span className="text-blue-400 font-mono bg-blue-500/10 px-3 py-1 rounded-lg border border-blue-500/20">{profitOptions[profitIndex]}% / month</span>
+                    </div>
+
+                    <div className="relative px-2 mb-8">
+                        <input
+                            type="range"
+                            min="0"
+                            max="3"
+                            step="1"
+                            value={profitIndex}
+                            onChange={(e) => setProfitIndex(parseInt(e.target.value))}
+                            className="w-full h-3 bg-gray-700 rounded-full appearance-none cursor-pointer accent-blue-500 hover:accent-blue-400 transition-all"
+                        />
+                        {/* Markers */}
+                        <div className="flex justify-between w-full px-1 absolute top-1/2 -translate-y-1/2 pointer-events-none">
+                            {[0, 1, 2, 3].map(i => (
+                                <div key={i} className={`w-3 h-3 rounded-full ${i <= profitIndex ? 'bg-blue-500' : 'bg-gray-600'}`}></div>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className="flex justify-between text-xs md:text-sm text-gray-500 font-medium px-1">
+                        {profitOptions.map((opt, i) => (
+                            <div key={i} className={`flex flex-col items-center gap-1 ${i === profitIndex ? 'text-blue-400 font-bold' : ''}`}>
+                                <span>{opt}%</span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+
+            {/* Results Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Growth Box */}
+                <div className="bg-gradient-to-br from-gray-800/80 to-gray-900/80 rounded-2xl p-8 border border-white/5 flex flex-col justify-center relative overflow-hidden group hover:border-blue-500/30 transition-all">
+                    <div className="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <svg width="64" height="64" viewBox="0 0 24 24" fill="white"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z" /></svg>
+                    </div>
+
+                    <h4 className="text-gray-400 text-xs font-bold uppercase tracking-widest text-center mb-8">Proj. Growth</h4>
+
+                    <div className="flex justify-between items-end border-b border-white/5 pb-6 mb-6">
+                        <span className="text-gray-400 text-sm font-medium">New Scaled Balance</span>
+                        <span className="text-2xl md:text-3xl font-black text-blue-400 font-mono tracking-tight">
+                            ${Math.round(balance).toLocaleString()}
+                        </span>
+                    </div>
+                    <div className="flex justify-between items-end">
+                        <span className="text-gray-400 text-sm font-medium">Total Payout</span>
+                        <span className="text-xl md:text-2xl font-bold text-green-400 font-mono tracking-tight">
+                            ${Math.round(totalPayout).toLocaleString()}
+                        </span>
+                    </div>
+                </div>
+
+                {/* Scaling Percentage Box */}
+                <div className="bg-gradient-to-br from-gray-800/80 to-gray-900/80 rounded-2xl p-8 border border-white/5 flex flex-col justify-center">
+                    <h4 className="text-gray-400 text-xs font-bold uppercase tracking-widest text-center mb-8">Scaling Logic</h4>
+                    <div className="grid grid-cols-3 gap-4 text-center divide-x divide-white/5">
+                        <div className="flex flex-col items-center gap-2 group">
+                            <span className="text-3xl font-black text-white group-hover:text-blue-400 transition-colors">25%</span>
+                            <span className="text-[10px] text-gray-500 font-bold uppercase tracking-wider">1st Scaling</span>
+                        </div>
+                        <div className="flex flex-col items-center gap-2 group">
+                            <span className="text-3xl font-black text-white group-hover:text-blue-400 transition-colors">40%</span>
+                            <span className="text-[10px] text-gray-500 font-bold uppercase tracking-wider">2nd Scaling</span>
+                        </div>
+                        <div className="flex flex-col items-center gap-2 group">
+                            <span className="text-3xl font-black text-white group-hover:text-blue-400 transition-colors">50%</span>
+                            <span className="text-[10px] text-gray-500 font-bold uppercase tracking-wider">3rd+ Scaling</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
 
 export default Challenges;
