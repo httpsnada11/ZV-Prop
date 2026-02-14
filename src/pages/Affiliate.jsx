@@ -446,30 +446,45 @@ const Affiliate = () => {
                         {commissionTiers.map((tier, idx) => (
                             <div
                                 key={idx}
-                                className={`relative rounded-3xl p-8 border transition-all duration-300 hover:scale-105 ${tier.featured
-                                    ? 'border-[#D63384] bg-gradient-to-br from-[#D63384]/10 to-[#FF1B6B]/10 shadow-[0_0_40px_rgba(214,51,132,0.3)]'
-                                    : 'border-white/10 bg-white/5 hover:border-white/20'
+                                className={`relative rounded-[2.5rem] p-8 md:p-10 border transition-all duration-500 group overflow-hidden ${tier.featured
+                                        ? 'bg-[#050505] border-[#D63384]/30 shadow-[0_0_60px_-15px_rgba(214,51,132,0.4)] z-10 scale-[1.02] md:scale-110'
+                                        : 'bg-[#030303] border-white/5 hover:border-white/10 hover:bg-[#050505] hover:-translate-y-2'
                                     }`}
                             >
+                                {/* Top Spotlight Effect */}
+                                <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-[2px] bg-gradient-to-r from-transparent ${tier.featured ? 'via-[#FF1B6B]' : 'via-[#712CF9]'} to-transparent opacity-50 blur-[2px] group-hover:opacity-100 transition-opacity`}></div>
+                                <div className={`absolute -top-20 left-1/2 -translate-x-1/2 w-40 h-40 ${tier.featured ? 'bg-[#FF1B6B]/20' : 'bg-[#712CF9]/10'} blur-[80px] rounded-full pointer-events-none`}></div>
+
                                 {tier.featured && (
-                                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-[#D63384] to-[#FF1B6B] text-white text-xs font-bold uppercase tracking-wider">
+                                    <div className="absolute top-6 right-6 px-3 py-1 rounded-full bg-[#FF1B6B]/20 border border-[#FF1B6B]/30 text-[#FF1B6B] text-[10px] font-bold uppercase tracking-wider backdrop-blur-md">
                                         Most Popular
                                     </div>
                                 )}
 
-                                <div className="text-center mb-8">
-                                    <div className={`text-6xl md:text-7xl font-black mb-4 text-transparent bg-clip-text bg-gradient-to-r ${tier.borderGradient}`}>
+                                <div className="mb-8 relative z-10">
+                                    <h3 className="text-xl font-medium text-gray-400 mb-2">{tier.title}</h3>
+                                    <div className="text-6xl md:text-7xl font-black text-white tracking-tighter flex items-baseline gap-1">
                                         {tier.percentage}
                                     </div>
-                                    <h3 className="text-2xl font-bold text-white mb-2">{tier.title}</h3>
-                                    <p className="text-gray-400 text-sm">{tier.subtitle}</p>
+                                    <p className="text-sm text-gray-500 mt-2">{tier.subtitle}</p>
                                 </div>
 
-                                <ul className="space-y-4">
+                                {/* CTA Button */}
+                                <button className={`w-full py-4 rounded-2xl font-bold flex items-center justify-center gap-2 mb-8 transition-all duration-300 group-hover:scale-[1.02] active:scale-[0.98] ${tier.featured
+                                        ? 'bg-gradient-to-r from-[#712CF9] to-[#FF1B6B] text-white shadow-lg shadow-[#D63384]/25 hover:shadow-[#D63384]/40'
+                                        : 'bg-white/5 border border-white/10 text-white hover:bg-white/10 hover:border-white/20'
+                                    }`}>
+                                    <span>Start Now</span>
+                                    <ChevronDown className="w-4 h-4 -rotate-90" />
+                                </button>
+
+                                <ul className="space-y-4 relative z-10">
                                     {tier.requirements.map((req, i) => (
-                                        <li key={i} className="flex items-start gap-3">
-                                            <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0 mt-0.5" />
-                                            <span className="text-gray-300 text-sm">{req}</span>
+                                        <li key={i} className="flex items-start gap-3 group/item">
+                                            <div className={`mt-1 w-5 h-5 rounded-full flex items-center justify-center shrink-0 ${tier.featured ? 'bg-[#FF1B6B]/20 text-[#FF1B6B]' : 'bg-[#712CF9]/20 text-[#712CF9]'}`}>
+                                                <CheckCircle2 className="w-3 h-3" />
+                                            </div>
+                                            <span className="text-gray-400 text-sm font-medium group-hover/item:text-gray-300 transition-colors">{req}</span>
                                         </li>
                                     ))}
                                 </ul>
@@ -477,10 +492,10 @@ const Affiliate = () => {
                         ))}
                     </div>
                 </div>
-            </section>
+            </section >
 
             {/* Why It's a Win-Win Section */}
-            <section className="w-full px-6 py-20 md:py-32 relative z-10 border-t border-white/10">
+            < section className="w-full px-6 py-20 md:py-32 relative z-10 border-t border-white/10" >
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16 space-y-4">
                         <h2 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-white">
@@ -506,10 +521,10 @@ const Affiliate = () => {
                         ))}
                     </div>
                 </div>
-            </section>
+            </section >
 
             {/* Affiliate Info Cards */}
-            <section className="w-full px-6 py-20 md:py-32 relative z-10 border-t border-white/10">
+            < section className="w-full px-6 py-20 md:py-32 relative z-10 border-t border-white/10" >
                 <div className="max-w-7xl mx-auto">
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                         {infoCards.map((card, idx) => (
@@ -530,10 +545,10 @@ const Affiliate = () => {
                         ))}
                     </div>
                 </div>
-            </section>
+            </section >
 
             {/* CTA Section */}
-            <section className="w-full px-6 py-20 md:py-32 relative overflow-hidden z-10 border-t border-white/10">
+            < section className="w-full px-6 py-20 md:py-32 relative overflow-hidden z-10 border-t border-white/10" >
                 <div className="relative z-10 max-w-4xl mx-auto text-center space-y-8">
                     <h2 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight">
                         <span className="text-white">Ready to Start </span>
@@ -568,10 +583,10 @@ const Affiliate = () => {
                         ))}
                     </div>
                 </div>
-            </section>
+            </section >
 
             {/* FAQ Section */}
-            <section className="w-full px-6 py-20 md:py-32 relative z-10 border-t border-white/10">
+            < section className="w-full px-6 py-20 md:py-32 relative z-10 border-t border-white/10" >
                 <div className="max-w-4xl mx-auto">
                     <div className="text-center mb-16 space-y-4">
                         <h2 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-white">
@@ -611,7 +626,7 @@ const Affiliate = () => {
                         ))}
                     </div>
                 </div>
-            </section>
+            </section >
 
             {/* Global Network Section */}
             {/* Global Network Section */}
@@ -639,7 +654,7 @@ const Affiliate = () => {
                     </div>
                 </div>
             </section>
-        </div>
+        </div >
     );
 };
 
