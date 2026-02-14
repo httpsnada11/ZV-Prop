@@ -1,11 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronDown } from 'lucide-react';
 import logoImage from '../assets/images/zv-removebg.avif';
 
 const Header = () => {
+    const [isScrolled, setIsScrolled] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsScrolled(window.scrollY > 50);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
     return (
-        <header className="fixed top-0 left-0 w-full z-50 px-6 py-4 flex items-center justify-between bg-transparent hover:bg-black/40 hover:backdrop-blur-xl border-b border-transparent hover:border-white/10 transition-all duration-500 group/header">
+        <header
+            className={`fixed top-0 left-0 w-full z-50 px-6 py-4 flex items-center justify-between transition-all duration-300 border-b ${isScrolled
+                    ? 'bg-black/80 backdrop-blur-md border-white/10 shadow-lg'
+                    : 'bg-transparent border-transparent'
+                }`}
+        >
             {/* Logo Section */}
             <Link to="/" className="flex items-center gap-2">
                 <img

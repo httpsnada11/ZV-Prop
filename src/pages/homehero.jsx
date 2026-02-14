@@ -35,9 +35,17 @@ const HomeHero = () => {
 
     return (
         <div className="w-full flex flex-col items-center">
-            {/* Section 1: Hero */}
-            {/* Section 1: Hero */}
-            <section className="min-h-screen w-full flex items-center px-6 py-20 relative bg-black">
+            {/* Fixed Background Image (Visible in Middle Sections) */}
+            <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] md:w-[120%] md:h-[120%] z-0 pointer-events-none">
+                <img
+                    src={bgImage3}
+                    alt="3D Background"
+                    className="w-full h-full object-contain animate-pulse-slow opacity-80"
+                />
+            </div>
+
+            {/* Section 1: Hero (Opaque Background) */}
+            <section className="min-h-screen w-full flex items-center px-6 py-20 relative bg-black z-20">
                 {/* Background Blobs/Effects */}
                 <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] bg-[#712CF9]/20 rounded-full blur-[120px] pointer-events-none"></div>
                 <div className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] bg-[#FF1B6B]/20 rounded-full blur-[120px] pointer-events-none"></div>
@@ -105,9 +113,9 @@ const HomeHero = () => {
 `}</style>
             </section >
 
-            {/* Section 2: Why We're Different */}
-            <section className="min-h-screen w-full flex flex-col items-center justify-center px-6 py-24 relative overflow-hidden bg-black/40 backdrop-blur-sm">
-                <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black pointer-events-none"></div>
+            {/* Section 2: Why We're Different (Transparent Background) */}
+            <section className="min-h-screen w-full flex flex-col items-center justify-center px-6 py-24 relative overflow-hidden bg-transparent z-10 backdrop-blur-sm">
+                <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black pointer-events-none opacity-50"></div>
 
                 <div className="max-w-4xl mx-auto text-center relative z-10">
                     <div className="inline-flex bg-white/5 backdrop-blur-md border border-white/20 px-4 py-2 rounded-full items-center gap-3 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-500 box-content w-auto max-w-none mb-8 mx-auto">
@@ -136,26 +144,34 @@ const HomeHero = () => {
                 </div>
             </section>
 
-            {/* Section 3: Trade at Your Own Pace */}
-            <section className="w-full py-24 flex items-center justify-center relative bg-black">
-                <div className="max-w-7xl mx-auto px-6">
-                    <div className="relative w-full max-w-sm mx-auto aspect-[3/4] rounded-[2.5rem] overflow-hidden group">
+            {/* Section 3: Trade at Your Own Pace & Funding Path Poll (Transparent Background) */}
+            <section className="w-full py-24 flex items-center justify-center relative bg-transparent overflow-hidden z-10">
+                {/* Background Glows */}
+                <div className="absolute top-[20%] right-[-10%] w-[600px] h-[600px] bg-[#712CF9]/20 rounded-full blur-[120px] pointer-events-none"></div>
+                <div className="absolute bottom-[-10%] right-[10%] w-[400px] h-[400px] bg-[#FF1B6B]/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+                <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center w-full relative z-10">
+                    {/* ... (rest of the section content remains same, handled by diff but context provided for replacement) */}
+
+
+                    {/* Left Side: Trade at Your Own Pace Card */}
+                    <div className="relative w-full max-w-sm mx-auto aspect-[3/4] rounded-[2.5rem] overflow-hidden group shadow-[0_0_50px_rgba(255,27,107,0.15)] hover:shadow-[0_0_80px_rgba(255,27,107,0.3)] transition-shadow duration-500">
                         {/* Card Background & Border */}
-                        <div className="absolute inset-0 bg-gradient-to-b from-[#0f1225] to-[#000000] z-0"></div>
+                        <div className="absolute inset-0 bg-gradient-to-b from-[#1a0b14] to-[#000000] z-0"></div>
                         <div className="absolute inset-0 rounded-[2.5rem] border border-white/10 z-20 pointer-events-none"></div>
 
-                        {/* Blue Glow Effects */}
-                        <div className="absolute top-[-10%] right-[-20%] w-[300px] h-[300px] bg-blue-600/20 rounded-full blur-[80px] z-10"></div>
-                        <div className="absolute bottom-[-10%] left-[-10%] w-[300px] h-[300px] bg-blue-600/10 rounded-full blur-[80px] z-10"></div>
+                        {/* Glow Effects */}
+                        <div className="absolute top-[-10%] right-[-20%] w-[300px] h-[300px] bg-[#712CF9]/20 rounded-full blur-[80px] z-10"></div>
+                        <div className="absolute bottom-[-10%] left-[-10%] w-[300px] h-[300px] bg-[#FF1B6B]/10 rounded-full blur-[80px] z-10"></div>
 
                         {/* Bottom Arc Glow */}
-                        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[120%] h-[100px] bg-blue-500/20 blur-[50px] rounded-[100%] z-10"></div>
-                        <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-[80%] h-[4px] bg-blue-400 blur-[2px] rounded-full z-20"></div>
+                        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[120%] h-[100px] bg-[#FF1B6B]/20 blur-[50px] rounded-[100%] z-10"></div>
+                        <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-[80%] h-[4px] bg-[#FF1B6B] blur-[2px] rounded-full z-20"></div>
 
                         {/* Content */}
                         <div className="relative z-30 h-full flex flex-col p-8 md:p-10 text-center items-center">
                             {/* Top Right Orb/Logo */}
-                            <div className="absolute top-6 right-6 w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-blue-900 shadow-[0_0_20px_rgba(37,99,235,0.5)] flex items-center justify-center border border-white/20">
+                            <div className="absolute top-6 right-6 w-10 h-10 rounded-full bg-gradient-to-br from-[#FF1B6B] to-[#712CF9] shadow-[0_0_20px_rgba(255,27,107,0.5)] flex items-center justify-center border border-white/20">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M12 2L15 8L21 9L17 14L18 20L12 17L6 20L7 14L3 9L9 8L12 2Z" fill="white" fillOpacity="0.8" />
                                 </svg>
@@ -168,12 +184,12 @@ const HomeHero = () => {
                                 </h3>
                                 <h3 className="text-5xl md:text-6xl font-bold tracking-tighter leading-[0.9]">
                                     <span className="text-white">at </span>
-                                    <span className="text-blue-400">Your</span>
+                                    <span className="text-[#FF1B6B]">Your</span>
                                 </h3>
                                 <h3 className="text-5xl md:text-6xl font-bold tracking-tighter text-white leading-[0.9]">
                                     Own
                                 </h3>
-                                <h3 className="text-5xl md:text-6xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-blue-300 to-blue-600 leading-[0.9]">
+                                <h3 className="text-5xl md:text-6xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-[#712CF9] via-[#D63384] to-[#FF1B6B] leading-[0.9]">
                                     Pace
                                 </h3>
                             </div>
@@ -190,19 +206,76 @@ const HomeHero = () => {
                             </div>
                         </div>
                     </div>
+
+                    {/* Right Side: Which Funding Path Poll */}
+                    <div className="w-full flex flex-col items-center lg:items-start text-center lg:text-left space-y-10 pl-0 lg:pl-12">
+                        <h2 className="text-4xl md:text-5xl lg:text-6xl font-black italic tracking-tight leading-[0.9] uppercase">
+                            <span className="text-white block mb-1">WHICH FUNDING</span>
+                            <span className="block mb-1">
+                                <span className="text-white">PATH </span>
+                                <span className="text-[#FF1B6B]">WOULD YOU</span>
+                            </span>
+                            <span className="text-[#FF1B6B] block">CHOOSE?</span>
+                        </h2>
+
+                        {/* Poll Options Grid */}
+                        <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
+                            {[
+                                { id: 'A', label: 'Instant Funding' },
+                                { id: 'B', label: '1-Step' },
+                                { id: 'C', label: '2-Step' },
+                                { id: 'D', label: '3-Step' }
+                            ].map((option) => (
+                                <button
+                                    key={option.id}
+                                    className="group relative flex items-center justify-start gap-4 p-1 rounded-full bg-gradient-to-r from-[#712CF9]/30 to-[#FF1B6B]/10 border border-[#FF1B6B]/20 hover:border-[#FF1B6B]/50 transition-all duration-300 overflow-hidden w-full backdrop-blur-sm"
+                                >
+                                    <div className="absolute inset-0 bg-[#FF1B6B]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+                                    {/* Circle Badge (Transparent) */}
+                                    <div className="w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform duration-300">
+                                        <div className="scale-75 md:scale-100">
+                                            <AdvancedLoader />
+                                        </div>
+                                    </div>
+
+                                    {/* Label */}
+                                    <span className="text-gray-200 font-medium text-lg tracking-wide group-hover:text-white transition-colors pr-6">
+                                        {option.label}
+                                    </span>
+                                </button>
+                            ))}
+                        </div>
+
+                        {/* Comment Your Choice Button */}
+                        <div className="w-full flex justify-center lg:justify-start pt-4">
+                            <button className="group relative px-8 py-3 rounded-full bg-[#FF1B6B]/10 border border-[#FF1B6B]/30 hover:bg-[#FF1B6B]/20 hover:border-[#FF1B6B]/50 transition-all duration-300 flex items-center gap-3 overflow-hidden backdrop-blur-md">
+                                <span className="relative z-10 text-gray-300 font-bold tracking-widest text-sm uppercase group-hover:text-white transition-colors">
+                                    Comment Your Choice
+                                </span>
+                                <svg
+                                    className="relative z-10 w-4 h-4 text-[#FF1B6B] group-hover:text-white group-hover:translate-x-1 group-hover:translate-y-1 transition-all duration-300"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth="2"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                >
+                                    <line x1="7" y1="7" x2="17" y2="17"></line>
+                                    <polyline points="17 7 17 17 7 17"></polyline>
+                                </svg>
+                                <div className="absolute inset-0 bg-[#FF1B6B]/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            </button>
+                        </div>
+                    </div>
+
                 </div>
             </section>
 
             {/* Section 3.5: Trading Assets / Industries Vertical Scroll Section */}
-            <section className="w-full relative bg-black pt-24 pb-48 overflow-hidden">
-                {/* Background 3D Image */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] z-0 pointer-events-none">
-                    <img
-                        src={bgImage3}
-                        alt="3D Background"
-                        className="w-full h-full object-contain animate-pulse-slow"
-                    />
-                </div>
+            <section className="w-full relative bg-transparent pt-24 pb-48 overflow-hidden z-10">
+                {/* Background 3D Image removed - using fixed background */}
 
                 <div className="max-w-[1400px] mx-auto px-6 relative z-10">
                     <div className="flex flex-col lg:flex-row gap-12 lg:gap-24 items-start">
@@ -357,7 +430,7 @@ const HomeHero = () => {
 
 
             {/* Section 4: Integrations Section */}
-            <section className="w-full py-32 flex flex-col items-center justify-center relative overflow-hidden">
+            <section className="w-full py-32 flex flex-col items-center justify-center relative overflow-hidden bg-black z-20">
                 <div className="absolute inset-0 bg-gradient-to-b from-black via-[#0A0B1A] to-black -z-10"></div>
 
                 {/* 2 Rings Visual - Absolute Centered Background with Mask */}
@@ -443,7 +516,7 @@ const HomeHero = () => {
 
             {/* Section 5: Community Section */}
             <section
-                className="w-full relative py-32 overflow-hidden"
+                className="w-full relative py-32 overflow-hidden bg-black z-20"
                 style={{
                     backgroundImage: `url(${ctabgImage})`,
                     backgroundPosition: 'center',

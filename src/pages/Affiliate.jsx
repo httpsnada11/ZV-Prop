@@ -1,7 +1,88 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ChevronDown, TrendingUp, Users, DollarSign, Gift, Zap, Award, Target, BarChart3, Shield, Rocket, CheckCircle2, UserPlus, Share2, Activity, Wallet } from 'lucide-react';
 import heroImage from '../assets/images/ctabgr2.png';
 import globeImage from '../assets/images/globev1.png';
+import { motion } from 'framer-motion';
+import approachBgImage from '../assets/images/3d2.avif';
+
+const AdvancedLoader = () => {
+    // Exact gradient colors from #712CF9 -> #D63384 -> #FF1B6B
+    const colors = [
+        '#712CF9', '#822DE6', '#932DD3', '#A42EC0', '#B52EAD', '#C62F9A',
+        '#D63384', '#DD2F80', '#E52B7C', '#EC2778', '#F42374', '#FF1B6B'
+    ];
+
+    return (
+        <div className="relative w-5 h-5 animate-spin">
+            {[...Array(12)].map((_, i) => (
+                <div
+                    key={i}
+                    className="absolute top-1/2 left-1/2 w-[2px] h-[5px] rounded-full"
+                    style={{
+                        backgroundColor: colors[i],
+                        transform: `translate(-50%, -50%) rotate(${i * 30}deg) translateY(-7px)`,
+                    }}
+                />
+            ))}
+        </div>
+    );
+};
+
+const CountUpAnimation = ({ end, duration = 2000, prefix = '', suffix = '' }) => {
+    const [count, setCount] = useState(0);
+    const [isVisible, setIsVisible] = useState(false);
+    const ref = useRef(null);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setIsVisible(true);
+                    observer.disconnect();
+                }
+            },
+            { threshold: 0.1 }
+        );
+
+        if (ref.current) {
+            observer.observe(ref.current);
+        }
+
+        return () => observer.disconnect();
+    }, []);
+
+    useEffect(() => {
+        if (!isVisible) return;
+
+        let startTime;
+        let animationFrame;
+
+        const animate = (timestamp) => {
+            if (!startTime) startTime = timestamp;
+            const progress = timestamp - startTime;
+            const percentage = Math.min(progress / duration, 1);
+
+            // Easing function for smooth animation
+            const easeOutQuart = (x) => 1 - Math.pow(1 - x, 4);
+
+            setCount(Math.floor(end * easeOutQuart(percentage)));
+
+            if (progress < duration) {
+                animationFrame = requestAnimationFrame(animate);
+            }
+        };
+
+        animationFrame = requestAnimationFrame(animate);
+
+        return () => cancelAnimationFrame(animationFrame);
+    }, [isVisible, end, duration]);
+
+    return (
+        <span ref={ref}>
+            {prefix}{count}{suffix}
+        </span>
+    );
+};
 
 const Affiliate = () => {
     const [openFaq, setOpenFaq] = useState(null);
@@ -181,7 +262,7 @@ const Affiliate = () => {
 
                 <div className="relative z-10 flex flex-col items-center space-y-8 max-w-5xl mx-auto text-center">
                     <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 backdrop-blur-sm border border-white/10">
-                        <Award className="w-4 h-4 text-[#FF1B6B]" />
+                        <AdvancedLoader />
                         <span className="text-sm font-semibold text-gray-300">Earn Up To 20% Commission</span>
                     </div>
 
@@ -212,13 +293,17 @@ const Affiliate = () => {
 
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 pt-8 w-full max-w-3xl">
                         {[
-                            { label: 'Lifetime Cookies', value: '∞' },
-                            { label: 'Avg. Commission', value: '$150' },
-                            { label: 'Payout Threshold', value: '$100' }
+                            { label: 'Lifetime Cookies', value: '∞', isNumeric: false },
+                            { label: 'Avg. Commission', value: '$150', isNumeric: true, end: 150, prefix: '$' },
+                            { label: 'Payout Threshold', value: '$100', isNumeric: true, end: 100, prefix: '$' }
                         ].map((stat, idx) => (
                             <div key={idx} className="flex flex-col items-center p-4 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10">
                                 <div className="text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#FF1B6B] to-[#712CF9]">
-                                    {stat.value}
+                                    {stat.isNumeric ? (
+                                        <CountUpAnimation end={stat.end} prefix={stat.prefix} />
+                                    ) : (
+                                        stat.value
+                                    )}
                                 </div>
                                 <div className="text-sm text-gray-400 mt-1">{stat.label}</div>
                             </div>
@@ -228,8 +313,19 @@ const Affiliate = () => {
             </section>
 
             {/* Our Approach Section - Zigzag Timeline */}
-            <section className="w-full px-6 py-20 md:py-32 relative z-10 border-t border-white/10">
-                <div className="max-w-7xl mx-auto">
+            <section
+                className="w-full px-6 py-20 md:py-32 relative z-10 border-t border-white/10 bg-black overflow-hidden"
+                style={{
+                    backgroundImage: `url(${approachBgImage})`,
+                    backgroundPosition: 'center',
+                    backgroundSize: 'cover',
+                    backgroundRepeat: 'no-repeat'
+                }}
+            >
+                {/* Overlay for better readability */}
+                <div className="absolute inset-0 bg-black/60 z-0"></div>
+
+                <div className="max-w-7xl mx-auto relative z-10">
                     <div className="text-center mb-20 space-y-4">
                         <h2 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-white">
                             Our Approach
@@ -247,12 +343,56 @@ const Affiliate = () => {
                         {/* Steps */}
                         <div className="space-y-16 md:space-y-24">
                             {approachSteps.map((step, idx) => (
-                                <div key={idx} className={`relative flex flex-col md:flex-row items-center gap-8 ${step.position === 'right' ? 'md:flex-row-reverse' : ''}`}>
+                                <motion.div
+                                    key={idx}
+                                    initial="hidden"
+                                    whileInView="visible"
+                                    viewport={{ once: true, amount: 0.3 }}
+                                    className={`relative flex flex-col md:flex-row items-center gap-8 ${step.position === 'right' ? 'md:flex-row-reverse' : ''}`}
+                                >
                                     {/* Card */}
-                                    <div className={`w-full md:w-[calc(50%-3rem)] ${step.position === 'left' ? 'md:text-right' : 'md:text-left'}`}>
-                                        <div className="p-6 md:p-8 rounded-3xl bg-gradient-to-br from-[#3D1F47]/80 to-[#1a0a1f]/80 backdrop-blur-sm border border-white/10 hover:border-[#D63384]/50 transition-all duration-300 group">
+                                    <div className={`relative w-full md:w-[calc(50%-3rem)] ${step.position === 'left' ? 'md:text-right' : 'md:text-left'}`}>
+                                        {/* Animated Border */}
+                                        <svg className="absolute inset-0 w-full h-full z-0 pointer-events-none overflow-visible">
+                                            <motion.rect
+                                                x="1" y="1"
+                                                width="calc(100% - 2px)"
+                                                height="calc(100% - 2px)"
+                                                rx="24" ry="24"
+                                                fill="none"
+                                                stroke="#D63384"
+                                                strokeWidth="2"
+                                                variants={{
+                                                    hidden: { pathLength: 0, opacity: 0 },
+                                                    visible: {
+                                                        pathLength: 1,
+                                                        opacity: 1,
+                                                        transition: {
+                                                            duration: 2,
+                                                            ease: "easeInOut",
+                                                            delay: idx * 0.3
+                                                        }
+                                                    }
+                                                }}
+                                            />
+                                        </svg>
+
+                                        <motion.div
+                                            className="p-6 md:p-8 rounded-3xl bg-gradient-to-br from-[#3D1F47]/80 to-[#1a0a1f]/80 backdrop-blur-sm relative z-10" // Removed border
+                                            variants={{
+                                                hidden: { opacity: 0, scale: 0.95 },
+                                                visible: {
+                                                    opacity: 1,
+                                                    scale: 1,
+                                                    transition: {
+                                                        duration: 1,
+                                                        delay: (idx * 0.3) + 0.5
+                                                    }
+                                                }
+                                            }}
+                                        >
                                             <div className={`flex items-start gap-4 ${step.position === 'left' ? 'md:flex-row-reverse md:text-right' : ''}`}>
-                                                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#712CF9] to-[#FF1B6B] flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                                                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#712CF9] to-[#FF1B6B] flex items-center justify-center shrink-0 shadow-lg shadow-[#D63384]/20">
                                                     <step.icon className="w-6 h-6 text-white" />
                                                 </div>
                                                 <div className="flex-1">
@@ -260,21 +400,27 @@ const Affiliate = () => {
                                                     <p className="text-gray-400 text-sm md:text-base leading-relaxed">{step.description}</p>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </motion.div>
                                     </div>
 
                                     {/* Circle Number */}
                                     <div className="relative z-10 flex items-center justify-center shrink-0">
-                                        <div className="w-16 h-16 rounded-full border-4 border-[#D63384] bg-black flex items-center justify-center">
+                                        <motion.div
+                                            initial={{ scale: 0, opacity: 0 }}
+                                            whileInView={{ scale: 1, opacity: 1 }}
+                                            viewport={{ once: true }}
+                                            transition={{ delay: (idx * 0.3) + 0.2, type: "spring", stiffness: 200 }}
+                                            className="w-16 h-16 rounded-full border-4 border-[#D63384] bg-black flex items-center justify-center shadow-[0_0_20px_rgba(214,51,132,0.5)]"
+                                        >
                                             <span className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#712CF9] to-[#FF1B6B]">
                                                 {step.number}
                                             </span>
-                                        </div>
+                                        </motion.div>
                                     </div>
 
                                     {/* Spacer for opposite side */}
                                     <div className="hidden md:block w-[calc(50%-3rem)]"></div>
-                                </div>
+                                </motion.div>
                             ))}
                         </div>
                     </div>
